@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { calculateInvestmentProfit, type InvestmentResult } from "../utils/investmentCalculator"
 
 interface InvestmentCalculatorModalProps {
@@ -7,38 +7,23 @@ interface InvestmentCalculatorModalProps {
 }
 
 export function InvestmentCalculatorModal({ show, onClose }: InvestmentCalculatorModalProps) {
-    const [amount, setAmount] = useState<string>("")
-    const [percentage, setPercentage] = useState<string>("")
+    const [amount, setAmount] = useState<string>("20000")
+    const [percentage, setPercentage] = useState<string>("10")
     const [result, setResult] = useState<InvestmentResult | null>(null)
 
-    const handleCalculate = () => {
+    // Automatically calculate when inputs change
+    useEffect(() => {
         const investmentAmount = parseFloat(amount)
         const annualPercentage = parseFloat(percentage)
 
-        if (isNaN(investmentAmount) || isNaN(annualPercentage)) {
-            alert("Please enter valid numbers")
-            return
+        if (!isNaN(investmentAmount) && !isNaN(annualPercentage) &&
+            investmentAmount > 0 && annualPercentage > 0) {
+            const calculatedResult = calculateInvestmentProfit(investmentAmount, annualPercentage)
+            setResult(calculatedResult)
+        } else {
+            setResult(null)
         }
-
-        if (investmentAmount <= 0 || annualPercentage <= 0) {
-            alert("Please enter positive values")
-            return
-        }
-
-        const calculatedResult = calculateInvestmentProfit(investmentAmount, annualPercentage)
-        setResult(calculatedResult)
-    }
-
-    const handleReset = () => {
-        setAmount("")
-        setPercentage("")
-        setResult(null)
-    }
-
-    const handleClose = () => {
-        handleReset()
-        onClose()
-    }
+    }, [amount, percentage])
 
     return (
         <>
@@ -57,7 +42,7 @@ export function InvestmentCalculatorModal({ show, onClose }: InvestmentCalculato
                             <button
                                 type="button"
                                 className="btn-close btn-close-white"
-                                onClick={handleClose}
+                                onClick={onClose}
                             ></button>
                         </div>
                         <div className="modal-body">
@@ -97,20 +82,6 @@ export function InvestmentCalculatorModal({ show, onClose }: InvestmentCalculato
                                 </div>
                             </div>
 
-                            <div className="d-grid gap-2 mb-4">
-                                <button
-                                    className="btn btn-primary btn-lg fw-bold shadow-sm"
-                                    onClick={handleCalculate}
-                                >
-                                    Calculate Profit
-                                </button>
-                                <button
-                                    className="btn btn-outline-secondary"
-                                    onClick={handleReset}
-                                >
-                                    Reset
-                                </button>
-                            </div>
 
                             {result && (
                                 <div className="alert alert-success border-0 shadow-sm">
