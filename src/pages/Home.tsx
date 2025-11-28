@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { InvestmentCalculatorModal } from "../components/InvestmentCalculatorModal"
+import { ActionSelector } from "../components/ActionSelector"
 
 export function Home() {
     const [amount, setAmount] = useState("")
@@ -8,6 +9,38 @@ export function Home() {
     const [date, setDate] = useState(new Date().toISOString().split('T')[0])
     const [showDetails, setShowDetails] = useState(false)
     const [showCalculatorModal, setShowCalculatorModal] = useState(false)
+
+    // Define quick actions
+    const quickActions = [
+        {
+            id: 'calculator',
+            label: 'Investment Calculator',
+            icon: 'calculator',
+            color: 'success',
+            onClick: () => setShowCalculatorModal(true)
+        },
+        {
+            id: 'budget',
+            label: 'Budget Planner',
+            icon: 'pie-chart',
+            color: 'info',
+            onClick: () => alert('Budget Planner coming soon!')
+        },
+        {
+            id: 'report',
+            label: 'Generate Report',
+            icon: 'file-earmark-text',
+            color: 'warning',
+            onClick: () => alert('Report Generator coming soon!')
+        },
+        {
+            id: 'goals',
+            label: 'Savings Goals',
+            icon: 'piggy-bank',
+            color: 'primary',
+            onClick: () => alert('Savings Goals coming soon!')
+        }
+    ]
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -115,22 +148,8 @@ export function Home() {
                 </div>
             </div>
 
-            {/* Floating Action Button for Investment Calculator */}
-            <button
-                className="btn btn-success rounded-circle shadow-lg position-fixed"
-                style={{
-                    bottom: '2rem',
-                    right: '2rem',
-                    width: '60px',
-                    height: '60px',
-                    fontSize: '1.5rem',
-                    zIndex: 1000
-                }}
-                onClick={() => setShowCalculatorModal(true)}
-                title="Investment Calculator"
-            >
-                <i className="bi bi-calculator"></i>
-            </button>
+            {/* Action Selector */}
+            <ActionSelector actions={quickActions} />
 
             {/* Investment Calculator Modal */}
             <InvestmentCalculatorModal
