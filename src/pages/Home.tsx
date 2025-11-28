@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { InvestmentCalculatorModal } from "../components/InvestmentCalculatorModal"
 import { ActionSelector } from "../components/ActionSelector"
+import { FinancialSummary } from "../components/FinancialSummary"
+import { useStore } from "../store/useStore"
 
 export function Home() {
     const [amount, setAmount] = useState("")
@@ -9,6 +11,8 @@ export function Home() {
     const [date, setDate] = useState(new Date().toISOString().split('T')[0])
     const [showDetails, setShowDetails] = useState(false)
     const [showCalculatorModal, setShowCalculatorModal] = useState(false)
+
+    const { addExpense } = useStore()
 
     // Define quick actions
     const quickActions = [
@@ -44,28 +48,32 @@ export function Home() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        console.log({
+
+        // Add expense to store
+        addExpense({
             amount: parseFloat(amount),
             description,
             category,
             date
         })
-        // Reset form or show success message
+
+        // Reset form
         setAmount("")
         setDescription("")
         setCategory("Food")
         setDate(new Date().toISOString().split('T')[0])
-        alert("Expense added! (Check console)")
+        alert("Expense added!")
     }
 
     return (
         <>
             <div className="container-fluid p-0">
+                {/* Financial Summary at the top */}
+                <FinancialSummary />
                 <div className="row justify-content-center">
                     <div className="col-12">
                         <div className="card shadow-sm border-0">
                             <div className="card-body">
-                                <h2 className="card-title text-center mb-4 fw-bold text-primary">Add Expense</h2>
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-3">
                                         <label htmlFor="amount" className="form-label text-muted small fw-bold">AMOUNT</label>
