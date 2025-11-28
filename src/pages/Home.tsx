@@ -5,6 +5,7 @@ export function Home() {
     const [description, setDescription] = useState("")
     const [category, setCategory] = useState("Food")
     const [date, setDate] = useState(new Date().toISOString().split('T')[0])
+    const [showDetails, setShowDetails] = useState(false)
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -47,46 +48,59 @@ export function Home() {
                                     </div>
                                 </div>
 
-                                <div className="mb-3">
-                                    <label htmlFor="description" className="form-label text-muted small fw-bold">DESCRIPTION</label>
-                                    <input
-                                        type="text"
-                                        className="form-control form-control-lg bg-light"
-                                        id="description"
-                                        placeholder="What is it for?"
-                                        value={description}
-                                        onChange={(e) => setDescription(e.target.value)}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="mb-3">
-                                    <label htmlFor="category" className="form-label text-muted small fw-bold">CATEGORY</label>
-                                    <select
-                                        className="form-select form-select-lg bg-light"
-                                        id="category"
-                                        value={category}
-                                        onChange={(e) => setCategory(e.target.value)}
+                                <div className="mb-3 text-center">
+                                    <button
+                                        type="button"
+                                        className="btn btn-link text-decoration-none btn-sm"
+                                        onClick={() => setShowDetails(!showDetails)}
                                     >
-                                        <option value="Food">Food</option>
-                                        <option value="Transport">Transport</option>
-                                        <option value="Utilities">Utilities</option>
-                                        <option value="Entertainment">Entertainment</option>
-                                        <option value="Other">Other</option>
-                                    </select>
+                                        {showDetails ? 'Hide Details' : 'Add Details'}
+                                    </button>
                                 </div>
 
-                                <div className="mb-4">
-                                    <label htmlFor="date" className="form-label text-muted small fw-bold">DATE</label>
-                                    <input
-                                        type="date"
-                                        className="form-control form-control-lg bg-light"
-                                        id="date"
-                                        value={date}
-                                        onChange={(e) => setDate(e.target.value)}
-                                        required
-                                    />
-                                </div>
+                                {showDetails && (
+                                    <>
+                                        <div className="mb-3">
+                                            <label htmlFor="description" className="form-label text-muted small fw-bold">DESCRIPTION</label>
+                                            <input
+                                                type="text"
+                                                className="form-control form-control-lg bg-light"
+                                                id="description"
+                                                placeholder="What is it for?"
+                                                value={description}
+                                                onChange={(e) => setDescription(e.target.value)}
+                                            />
+                                        </div>
+
+                                        <div className="mb-3">
+                                            <label htmlFor="category" className="form-label text-muted small fw-bold">CATEGORY</label>
+                                            <select
+                                                className="form-select form-select-lg bg-light"
+                                                id="category"
+                                                value={category}
+                                                onChange={(e) => setCategory(e.target.value)}
+                                            >
+                                                <option value="Food">Food</option>
+                                                <option value="Transport">Transport</option>
+                                                <option value="Utilities">Utilities</option>
+                                                <option value="Entertainment">Entertainment</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <label htmlFor="date" className="form-label text-muted small fw-bold">DATE</label>
+                                            <input
+                                                type="date"
+                                                className="form-control form-control-lg bg-light"
+                                                id="date"
+                                                value={date}
+                                                onChange={(e) => setDate(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+                                    </>
+                                )}
 
                                 <button type="submit" className="btn btn-primary w-100 btn-lg fw-bold shadow-sm">
                                     Add Expense
