@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 function RootLayout() {
     return (
-        <div>
+        <>
             <nav className="navbar navbar-dark bg-dark fixed-top">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">Pua Bank</a>
@@ -27,10 +27,10 @@ function RootLayout() {
                     </div>
                 </div>
             </nav>
-            <main className="container mt-5 pt-5">
+            <main className="mt-5 h-100">
                 <Outlet />
             </main>
-        </div>
+        </>
     )
 }
 
