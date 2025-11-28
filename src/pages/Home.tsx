@@ -20,11 +20,11 @@ export function Home() {
             onClick: () => setShowCalculatorModal(true)
         },
         {
-            id: 'budget',
-            label: 'Budget Planner',
+            id: 'cards',
+            label: 'Cards',
             icon: 'pie-chart',
             color: 'info',
-            onClick: () => alert('Budget Planner coming soon!')
+            onClick: () => alert('Cards coming soon!')
         },
         {
             id: 'report',
@@ -34,11 +34,11 @@ export function Home() {
             onClick: () => alert('Report Generator coming soon!')
         },
         {
-            id: 'goals',
-            label: 'Savings Goals',
+            id: 'incomes',
+            label: 'Incomes',
             icon: 'piggy-bank',
             color: 'primary',
-            onClick: () => alert('Savings Goals coming soon!')
+            onClick: () => alert('Incomes coming soon!')
         }
     ]
 
