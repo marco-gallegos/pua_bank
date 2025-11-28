@@ -81,7 +81,7 @@ export function Home() {
                                             <span className="input-group-text bg-light border-end-0">$</span>
                                             <input
                                                 type="number"
-                                                className="form-control bg-light border-start-0"
+                                                className="form-control bg-light border-start-0 border-end-0"
                                                 id="amount"
                                                 placeholder="0.00"
                                                 step="0.01"
@@ -89,6 +89,9 @@ export function Home() {
                                                 onChange={(e) => setAmount(e.target.value)}
                                                 required
                                             />
+                                            <button type="submit" className="btn btn-primary shadow-sm" style={{ width: '56px' }}>
+                                                <i className="bi bi-plus-lg fs-4"></i>
+                                            </button>
                                         </div>
                                     </div>
 
@@ -145,10 +148,6 @@ export function Home() {
                                             </div>
                                         </>
                                     )}
-
-                                    <button type="submit" className="btn btn-primary w-100 btn-lg fw-bold shadow-sm">
-                                        Add Expense
-                                    </button>
                                 </form>
                             </div>
                         </div>
