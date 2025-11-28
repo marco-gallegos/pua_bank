@@ -30,7 +30,7 @@ export function ActionSelector({ actions }: ActionSelectorProps) {
                     transform: isOpen ? 'translateY(0)' : 'translateY(100%)',
                     transition: 'transform 0.3s ease-in-out',
                     zIndex: 1040,
-                    paddingBottom: 'env(safe-area-inset-bottom)'
+                    paddingBottom: '50px'
                 }}
             >
                 <div className="container-fluid p-3">
@@ -64,28 +64,27 @@ export function ActionSelector({ actions }: ActionSelectorProps) {
             {/* Backdrop */}
             {isOpen && (
                 <div
-                    className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"
+                    className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 "
                     style={{ zIndex: 1039 }}
                     onClick={() => setIsOpen(false)}
                 ></div>
             )}
 
-            {/* Floating Action Button */}
+            {/* Bottom Text Button */}
             <button
-                className="btn btn-primary rounded-circle shadow-lg position-fixed d-flex align-items-center justify-content-center"
+                className="btn btn-primary w-100 position-fixed shadow-lg fw-bold"
                 style={{
-                    bottom: '1.5rem',
-                    right: '1.5rem',
-                    width: '64px',
-                    height: '64px',
-                    fontSize: '1.5rem',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
                     zIndex: 1050,
-                    transition: 'transform 0.3s ease-in-out'
+                    borderRadius: 0,
+                    padding: '1rem',
+                    fontSize: '1rem'
                 }}
                 onClick={() => setIsOpen(!isOpen)}
-                title="Quick Actions"
             >
-                <i className={`bi bi-${isOpen ? 'x-lg' : 'plus-lg'}`}></i>
+                {isOpen ? 'Close' : 'Quick Actions'}
             </button>
         </>
     )
