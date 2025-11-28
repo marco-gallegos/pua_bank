@@ -3,6 +3,7 @@ import { InvestmentCalculatorModal } from "../components/InvestmentCalculatorMod
 import { ActionSelector } from "../components/ActionSelector"
 import { FinancialSummary } from "../components/FinancialSummary"
 import { useStore } from "../store/useStore"
+import ExampleWorkerDemo from "../components/ExampleWorkerDemo"
 
 export function Home() {
     const [amount, setAmount] = useState("")
@@ -70,6 +71,9 @@ export function Home() {
             <div className="container-fluid p-0">
                 {/* Financial Summary at the top */}
                 <FinancialSummary />
+
+                {/* Demo: Example Web Worker */}
+                <ExampleWorkerDemo />
                 <div className="row justify-content-center">
                     <div className="col-12">
                         <div className="card shadow-sm border-0">
